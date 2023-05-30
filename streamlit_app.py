@@ -1,9 +1,9 @@
 #import cv2
 import streamlit as st
-from ultralytics import YOLO
-import openai
-from collections import defaultdict
-import pyttsx3
+#from ultralytics import YOLO
+#import openai
+#from collections import defaultdict
+#import pyttsx3
 
 engine = pyttsx3.init()
 openai.api_key = ''
