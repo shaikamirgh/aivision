@@ -3,9 +3,8 @@ import streamlit as st
 #from ultralytics import YOLO
 import openai
 #from collections import defaultdict
-import pyttsx3
 
-engine = pyttsx3.init()
+
 openai.api_key = ''
 
 def chat_with_gpt(prompt):
@@ -60,21 +59,18 @@ def main():
     print(list2)
     st.write("The Objects detected are: ", list2)
     for objectname in list2:
-        engine.say(objectname)
-        engine.runAndWait()
+
 
     user_prompt = "Given list of objects, guess the place or describe the environment. " + str(list2)
     response = chat_with_gpt(user_prompt)
     print("AI Assistant:", response)
     st.write("AI Assistant:", response)
-    engine.say(response)
-    engine.runAndWait()
+
     user_input = st.text_input("Ask me anything: ") + "Given list of objects are: " + str(list2)
     response = chat_with_gpt(user_prompt)
     print("AI Assistant:", response)
     st.write("AI Assistant:", response)
-    engine.say(response)
-    engine.runAndWait()
+
 
 
 
