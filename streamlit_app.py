@@ -3,7 +3,7 @@ import streamlit as st
 #from ultralytics import YOLO
 import openai
 #from collections import defaultdict
-
+import cv2
 
 openai.api_key = ''
 
