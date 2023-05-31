@@ -1,10 +1,11 @@
-#import cv2
+from PIL import Image
 import streamlit as st
-#from ultralytics import YOLO
+from ultralytics import YOLO
 import openai
-#from collections import defaultdict
-import cv2
+from collections import defaultdict
+import pyttsx3
 
+engine = pyttsx3.init()
 openai.api_key = ''
 
 def chat_with_gpt(prompt):
@@ -30,46 +31,50 @@ def count_items(input_list):
 
 def main():
     st.title("AI Assistant")
-    run = st.button('Run', key='button1')
-    capture = st.button('Capture', key='button2')
-    FRAME_WINDOW = st.image([])
-    camera = cv2.VideoCapture(0)
-    while run:
-        _, frame = camera.read()
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        FRAME_WINDOW.image(frame)
-        if capture:
-            cv2.imwrite('cap.jpg', frame)
-            break
+    st.write("Take a pic and upload here: ")
+    #run = st.button('Run', key='button1')
+    #capture = st.button('Capture', key='button2')
 
-    camera.release()
-    list1=[]
-    model = YOLO("yolov8s.pt")
-    results=model.predict(source='cap.jpg',show=False,save_txt=True) 
-    #st.image('cap.jpg', caption='Image captured doing Object detection')
+    img = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
+    if img is not None:
+        image = Image.open(img)
+        st.image(image, caption='Uploaded Image.', use_column_width=True)
+        print(type(image))
+        image.save('curimage.png')
+        
+        list1=[]
+        model = YOLO("yolov8s.pt")
+        results=model.predict(source='curimage.png',show=False,save_txt=True) 
+        #st.image('cap.jpg', caption='Image captured doing Object detection')
 
-    for result in results:
-        cls = result.boxes.cls
-        for c in cls:
-            #print(result.names[int(c)],end=" ")
-            list1.append(result.names[int(c)])
+        for result in results:
+            cls = result.boxes.cls
+            for c in cls:
+                #print(result.names[int(c)],end=" ")
+                list1.append(result.names[int(c)])
 
 
-    list2 = count_items(list1)
-    print(list2)
-    st.write("The Objects detected are: ", list2)
-
-    user_prompt = "Given list of objects, guess the place or describe the environment. " + str(list2)
-    response = chat_with_gpt(user_prompt)
-    print("AI Assistant:", response)
-    st.write("AI Assistant:", response)
-
-    user_input = st.text_input("Ask me anything: ") + "Given list of objects are: " + str(list2)
-    response = chat_with_gpt(user_prompt)
-    print("AI Assistant:", response)
-    st.write("AI Assistant:", response)
-
-
+        list2 = count_items(list1)
+        print(list2)
+        st.write("The Objects detected are: ", list2)
+        #for objectname in list2:
+            #engine.say(objectname)
+            #engine.runAndWait()
+        '''
+        user_prompt = "Given list of objects, guess the place or describe the environment. " + str(list2)
+        response = chat_with_gpt(user_prompt)
+        print("AI Assistant:", response)
+        st.write("AI Assistant:", response)
+        #engine.say(response)
+        #engine.runAndWait()
+        
+        user_input = st.text_input("Ask me anything: ") + "Given list of objects are: " + str(list2)
+        response = chat_with_gpt(user_prompt)
+        print("AI Assistant:", response)
+        st.write("AI Assistant:", response)
+        #engine.say(response)
+        #engine.runAndWait()
+        '''
 
 
 if __name__ == '__main__':

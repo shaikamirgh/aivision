@@ -1,6 +1,6 @@
-opencv-python
+opencv-python-headless
 streamlit
 ultralytics
 openai
 pyttsx3
-opencv-python-headless
+
