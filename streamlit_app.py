@@ -58,8 +58,6 @@ def main():
     list2 = count_items(list1)
     print(list2)
     st.write("The Objects detected are: ", list2)
-    for objectname in list2:
-
 
     user_prompt = "Given list of objects, guess the place or describe the environment. " + str(list2)
     response = chat_with_gpt(user_prompt)
