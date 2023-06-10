@@ -6,7 +6,7 @@ from collections import defaultdict
 import pyttsx3
 
 engine = pyttsx3.init()
-openai.api_key = ''
+openai.api_key = ' < YOUR API KEY HERE> '
 
 def chat_with_gpt(prompt):
     # Define the parameters for the API call
@@ -44,7 +44,7 @@ def main():
         
         list1=[]
         model = YOLO("yolov8s.pt")
-        results=model.predict(source='curimage.png',show=False,save_txt=True) 
+        results=model.predict(source='curimage.png',show=False,save_txt=False) 
         #st.image('cap.jpg', caption='Image captured doing Object detection')
 
         for result in results:
@@ -60,7 +60,7 @@ def main():
         #for objectname in list2:
             #engine.say(objectname)
             #engine.runAndWait()
-        '''
+        
         user_prompt = "Given list of objects, guess the place or describe the environment. " + str(list2)
         response = chat_with_gpt(user_prompt)
         print("AI Assistant:", response)
@@ -74,7 +74,7 @@ def main():
         st.write("AI Assistant:", response)
         #engine.say(response)
         #engine.runAndWait()
-        '''
+        
 
 
 if __name__ == '__main__':
