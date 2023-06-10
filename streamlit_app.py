@@ -69,7 +69,7 @@ def main():
         #engine.runAndWait()
         
         user_input = st.text_input("Ask me anything: ") + "Given list of objects are: " + str(list2)
-        response = chat_with_gpt(user_prompt)
+        response = chat_with_gpt(user_input)
         print("AI Assistant:", response)
         st.write("AI Assistant:", response)
         #engine.say(response)
