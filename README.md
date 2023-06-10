@@ -5,7 +5,7 @@ App which uses AI, Computer Vision and LLM to help you do tasks, suggest recipie
 
 ### Install
 
-This project files requires **Python 3** and the following Python libraries installed:
+This project files requires [**Python 3**](https://www.python.org/downloads/) and the following Python libraries installed:
 
 - [OpenCV](https://opencv.org/)
 - [Numpy](http://numpy.org/)
