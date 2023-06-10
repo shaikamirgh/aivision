@@ -22,6 +22,11 @@ This project files requires [**Python 3**](https://www.python.org/downloads/) an
 pip install -r requirements.txt
 ```  
 
+### Get OpenAI API Key :
+https://platform.openai.com/account/api-keys \
+Replace < YOUR API KEY HERE> in code with this Key 
+
+
 ### Run
 To perform Object detection and AI Assisstant from your CAMERA, go to the integrated terminal and paste this:
 
